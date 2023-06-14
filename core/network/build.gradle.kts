@@ -1,6 +1,10 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -34,11 +38,12 @@ android {
 }
 
 dependencies {
-
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.android.compiler)
+    implementation(libs.okhttp3.core)
+    implementation(libs.okhttp3.logging.interceptor)
+    implementation(libs.okhttp3.okhttp)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
 }
