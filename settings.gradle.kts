@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Trailer2You Customer"
-include ':app'
+include ("app")
+
