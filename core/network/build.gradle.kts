@@ -1,10 +1,8 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -28,12 +26,57 @@ android {
             )
         }
     }
+    flavorDimensions += listOf("api")
+    productFlavors {
+        create("production") {
+            dimension = "api"
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                BuildConfigField.PROD_BASE_URL
+            )
+            buildConfigField(
+                "String",
+                "WEB_SOCKET_BASE_URL",
+                BuildConfigField.PROD_WEB_SOCKET_BASE_URL
+            )
+            buildConfigField(
+                "String",
+                "STRIPE_API_KEY",
+                BuildConfigField.PROD_STRIPE_API_KEY
+            )
+        }
+        create("development") {
+            dimension = "api"
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                BuildConfigField.DEV_BASE_URL
+            )
+            buildConfigField(
+                "String",
+                "WEB_SOCKET_BASE_URL",
+                BuildConfigField.DEV_WEB_SOCKET_BASE_URL
+            )
+            buildConfigField(
+                "String",
+                "STRIPE_API_KEY",
+                BuildConfigField.DEV_STRIPE_API_KEY
+            )
+        }
+    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+    buildFeatures {
+        buildConfig = true
+    }
+    hilt {
+        enableAggregatingTask = true
     }
 }
 

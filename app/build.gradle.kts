@@ -27,6 +27,18 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+    flavorDimensions += listOf("api")
+    productFlavors {
+        create("production") {
+            dimension = "api"
+            manifestPlaceholders["appLabel"] = "Trailer2You Customer"
+        }
+        create("development") {
+            dimension = "api"
+            applicationIdSuffix = ".debug"
+            manifestPlaceholders["appLabel"] = "[DEV] Trailer2You Customer"
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -45,16 +57,7 @@ android {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
     }
-    flavorDimensions += listOf("api")
-    productFlavors {
-        create("production") {
-            dimension = "api"
-        }
-        create("development") {
-            dimension = "api"
-            applicationId = "apps.trailer2you.customer.dev"
-        }
-    }
+
 }
 
 dependencies {
