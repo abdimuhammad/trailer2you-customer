@@ -83,6 +83,7 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.dagger.hilt.android)
+    implementation(project(mapOf("path" to ":core:common")))
     kapt(libs.dagger.hilt.android.compiler)
     implementation(libs.okhttp3.core)
     implementation(libs.okhttp3.logging.interceptor)
